@@ -1,12 +1,12 @@
+// src/components/global/Footer.js
 import React from 'react';
 
-
 function Footer() {
-    return(
-        <>
-        <h1>Footer</h1>
-        </>
-    );
+  return (
+    <footer>
+      <p>&copy; {new Date().getFullYear()} Little Lemon. All rights reserved.</p>
+    </footer>
+  );
 }
 
 export default Footer;
