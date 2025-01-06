@@ -28,6 +28,18 @@
   color: #61dafb;
 }
 
+.items-grid {
+  display:grid;
+  grid-template-columns: repeat(3, 1fr)
+}
+@media (max-width: 1000px) {
+  .items-grid {grid-template-columns: repeat(2, 1fr)}
+}
+
+@media (max-width: 800px) {
+  .items-grid {grid-template-columns: 1fr}
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
