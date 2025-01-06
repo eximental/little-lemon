@@ -60,15 +60,15 @@ function BookingForm({ submitForm, availableTimes, updateTimes }) {
           error = 'Time is required.';
         }
         break;
-      case 'guests':
-        if (!value) {
-          error = 'Number of guests is required.';
-        } else if (value < 1) {
-          error = 'At least one guest is required.';
-        } else if (value > 10) {
-          error = 'Maximum of 10 guests allowed.';
-        }
-        break;
+        case 'guests':
+            if (!value) {
+                error = 'Number of guests is required.';
+            } else if (value < 1) {
+                error = 'At least one guest is required.';
+            } else if (value > 10) {
+                error = 'Maximum of 10 guests allowed.';
+            }
+            break;
       default:
         break;
     }
@@ -118,31 +118,32 @@ function BookingForm({ submitForm, availableTimes, updateTimes }) {
       }));
     }
 
-    // Validate guests
-    if (!guests) {
-      setFormErrors((prevErrors) => ({
-        ...prevErrors,
-        guests: 'Number of guests is required.',
-      }));
-      valid = false;
-    } else if (guests < 1) {
-      setFormErrors((prevErrors) => ({
-        ...prevErrors,
-        guests: 'At least one guest is required.',
-      }));
-      valid = false;
-    } else if (guests > 10) {
-      setFormErrors((prevErrors) => ({
-        ...prevErrors,
-        guests: 'Maximum of 10 guests allowed.',
-      }));
-      valid = false;
-    } else {
-      setFormErrors((prevErrors) => ({
-        ...prevErrors,
-        guests: '',
-      }));
-    }
+// Validate guests
+if (!formData.guests || formData.guests === "") {
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      guests: "Number of guests is required.",
+    }));
+    valid = false;
+  } else if (formData.guests < 1) {
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      guests: "At least one guest is required.",
+    }));
+    valid = false;
+  } else if (formData.guests > 10) {
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      guests: "Maximum of 10 guests allowed.",
+    }));
+    valid = false;
+  } else {
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      guests: "",
+    }));
+  }
+  
 
     setIsFormValid(valid);
   };
@@ -229,6 +230,7 @@ function BookingForm({ submitForm, availableTimes, updateTimes }) {
           onChange={handleChange}
           required
           min={today} // Prevent selecting past dates
+          aria-label="Choose date"
         />
         {formErrors.date && (
           <p role="alert" style={{ color: 'red', fontSize: '0.8em' }}>
@@ -277,29 +279,31 @@ function BookingForm({ submitForm, availableTimes, updateTimes }) {
 
       {/* Guests Field */}
       <fieldset>
-        <legend>Number of Guests</legend>
-        <label htmlFor="guests">Number of guests</label>
-        <input
-          type="number"
-          id="guests"
-          value={formData.guests}
-          onChange={handleChange}
-          min="1"
-          max="10"
-          required
-        />
-        {formErrors.guests && (
-          <p role="alert" style={{ color: 'red', fontSize: '0.8em' }}>
-            {formErrors.guests}
-          </p>
-        )}
-      </fieldset>
+  <legend>Number of Guests</legend>
+  <label htmlFor="guests">Number of guests</label>
+  <input
+    type="number"
+    id="guests"
+    value={formData.guests}
+    onChange={handleChange}
+    min="1"
+    max="10"
+    required
+    aria-label="Choose number of guests"
+  />
+  {formErrors.guests && (
+    <p role="alert" style={{ color: "red", fontSize: "0.8em" }}>
+      {formErrors.guests}
+    </p>
+  )}
+</fieldset>
+
 
       {/* Occasion Field */}
       <fieldset>
         <legend>Occasion</legend>
         <label htmlFor="occasion">Occasion</label>
-        <select id="occasion" value={formData.occasion} onChange={handleChange}>
+        <select id="occasion" value={formData.occasion} onChange={handleChange} aria-label="Choose occasion">
           <option>Birthday</option>
           <option>Anniversary</option>
         </select>
