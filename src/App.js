@@ -1,31 +1,19 @@
 import './App.css';
-import Header from './global/Header';
-import Footer from './global/Footer';
+import Header from './components/global/Header';
+import Footer from './components/global/Footer';
+import AppRoutes from './Routes';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 
 function App() {
   return (
-    <>
-    <head>
-      <title>Little lemon</title>
-      <meta name="description" content="your text goes here"/>
-      <meta name="og:title" content=""/>
-      <meta name="og:description" content=""/>
-    </head>
-      <Header />
-      <main>
-        <h1>Little Lemon</h1>
-        <div className="items-grid">
-          <p>1</p>
-          <p>2</p>
-          <p>3</p>
-          <p>4</p>
-          <p>5</p>
-          <p>6</p>
-        </div>
-      </main>
-      <Footer />
-    </>
+      <Router>
+        <Header />
+        <main>
+          <AppRoutes />
+        </main>
+        <Footer />
+      </Router>
   );
 }
 
